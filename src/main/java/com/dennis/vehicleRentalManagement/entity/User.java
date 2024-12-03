@@ -1,15 +1,14 @@
 package com.dennis.vehicleRentalManagement.entity;
 
+import com.dennis.vehicleRentalManagement.authorization.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Getter
@@ -36,6 +35,8 @@ public class User implements UserDetails, Principal {
     private String address;
     private String idNumber;
 
+
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Override
@@ -45,7 +46,7 @@ public class User implements UserDetails, Principal {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override

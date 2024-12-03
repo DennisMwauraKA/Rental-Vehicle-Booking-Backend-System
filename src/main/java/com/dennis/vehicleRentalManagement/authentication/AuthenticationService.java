@@ -1,7 +1,7 @@
 package com.dennis.vehicleRentalManagement.authentication;
 
+import com.dennis.vehicleRentalManagement.authorization.Role;
 import com.dennis.vehicleRentalManagement.entity.User;
-import com.dennis.vehicleRentalManagement.entity.Role;
 import com.dennis.vehicleRentalManagement.repository.UserRepository;
 import com.dennis.vehicleRentalManagement.service.JwtService;
 import jakarta.validation.Valid;
@@ -47,8 +47,11 @@ public class AuthenticationService {
             Authentication authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
             if (authentication.isAuthenticated()) {
+                User user = userRepository.findByEmail(request.getEmail())
+                        .orElseThrow(() -> new IllegalStateException("User not found"));
 
-                String token = jwtService.generateToken(request.getEmail());
+                String token = jwtService.generateToken(user);
+
                 return new AuthenticationResponse(token);
             }
         } catch (Exception e) {
@@ -57,4 +60,6 @@ public class AuthenticationService {
         return null;
 
     }
+
+
 }
