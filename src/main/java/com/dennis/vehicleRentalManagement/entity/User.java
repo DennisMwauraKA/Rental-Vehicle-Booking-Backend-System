@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,6 +35,7 @@ public class User implements UserDetails, Principal {
     private String phoneNumber;
     private String address;
     private String idNumber;
+
 
 
     @Enumerated(EnumType.STRING)

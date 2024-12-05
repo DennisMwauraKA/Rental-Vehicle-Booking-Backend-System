@@ -20,7 +20,11 @@ public enum Role {
             ADMIN_CREATE,
             ADMIN_DELETE
     )),
-    USER(Collections.emptySet()),
+USER(Set.of(
+       USER_CREATE,
+        USER_UPDATE,
+        USER_READ
+)),
     ;
 
     private final Set<Permission> permissions;
