@@ -23,9 +23,9 @@ public class BeansConfig {
     }
 
     @Bean
-    public AuditorAware<Integer> auditorAware() {
+    public AuditorAware<Integer>auditorAware() {
 
-        return new ApplicationAuditorware();
+        return new ApplicationAuditAware();
     }
     @Bean
     public AuthenticationProvider authenticationProvider() {

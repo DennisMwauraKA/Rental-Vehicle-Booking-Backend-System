@@ -15,9 +15,7 @@ public enum Permission {
 
 
 
-    USER_READ("user:read"),
-    USER_CREATE("user:create"),
-    USER_UPDATE("user:update"),
+
     ;
     private final String permissions;
 

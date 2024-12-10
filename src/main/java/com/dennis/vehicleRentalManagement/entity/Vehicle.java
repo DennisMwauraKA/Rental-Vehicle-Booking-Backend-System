@@ -1,23 +1,20 @@
 package com.dennis.vehicleRentalManagement.entity;
 
+import com.dennis.vehicleRentalManagement.commonfields.ParentEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
 @Setter
 @Getter
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @Entity
 
-public class Vehicle {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Vehicle extends ParentEntity {
+
     private String model;
     private String color;
     private Double hiringPrice;

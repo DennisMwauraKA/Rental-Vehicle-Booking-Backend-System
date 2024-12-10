@@ -3,6 +3,7 @@ package com.dennis.vehicleRentalManagement;
 import com.dennis.vehicleRentalManagement.authorization.Role;
 import com.dennis.vehicleRentalManagement.entity.User;
 import com.dennis.vehicleRentalManagement.repository.UserRepository;
+import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -52,5 +53,8 @@ public class VehicleRentalManagementApplication implements CommandLineRunner {
             user.setPassword(new BCryptPasswordEncoder().encode(adminPassword));
             userRepository.save(user);
         }
+
+
+
     }
 }

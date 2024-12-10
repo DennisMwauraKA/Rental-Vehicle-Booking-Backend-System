@@ -35,7 +35,8 @@ public class User implements UserDetails, Principal {
     private String phoneNumber;
     private String address;
     private String idNumber;
-
+    @OneToMany(mappedBy = "user")
+    private List<Booking>bookings;
 
 
     @Enumerated(EnumType.STRING)
