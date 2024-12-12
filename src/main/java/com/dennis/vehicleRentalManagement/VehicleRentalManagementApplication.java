@@ -3,7 +3,7 @@ package com.dennis.vehicleRentalManagement;
 import com.dennis.vehicleRentalManagement.authorization.Role;
 import com.dennis.vehicleRentalManagement.entity.User;
 import com.dennis.vehicleRentalManagement.repository.UserRepository;
-import com.github.javafaker.Faker;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;

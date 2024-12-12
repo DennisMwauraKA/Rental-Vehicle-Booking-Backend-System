@@ -19,12 +19,12 @@ import java.util.List;
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
 @Builder
-
+@ToString
 public class User implements UserDetails, Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer Id;
+    private Integer id;
     private String firstName;
     private String lastName;
 
@@ -35,7 +35,7 @@ public class User implements UserDetails, Principal {
     private String phoneNumber;
     private String address;
     private String idNumber;
-    @OneToMany(mappedBy = "user")
+  @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<Booking>bookings;
 
 

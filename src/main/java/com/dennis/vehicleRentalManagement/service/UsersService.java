@@ -46,7 +46,7 @@ public class UsersService {
 
 
     // update user details
-    public User updateUser(Integer userId, Authentication connectedUser, UpdateUserDto  updateUserDto) {
+    public Integer updateUser(Integer userId, Authentication connectedUser, UpdateUserDto  updateUserDto) {
 
 
         try{
@@ -64,7 +64,7 @@ public class UsersService {
             existingUser.setIdNumber(updateUserDto.getIdNumber());
             existingUser.setPhoneNumber(updateUserDto.getPhoneNumber());
 
-            return userRepository.save(existingUser);
+            return userRepository.save(existingUser).getId();
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }

@@ -6,6 +6,7 @@ import com.dennis.vehicleRentalManagement.dtos.VehicleRegistrationRequest;
 import com.dennis.vehicleRentalManagement.dtos.VehicleResponse;
 import com.dennis.vehicleRentalManagement.entity.Vehicle;
 import com.dennis.vehicleRentalManagement.mapper.VehicleMapper;
+import com.dennis.vehicleRentalManagement.repository.BookingRepository;
 import com.dennis.vehicleRentalManagement.repository.VehicleRepository;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -22,9 +23,12 @@ public class VehicleService {
     private final VehicleRepository vehicleRepository;
     private final VehicleMapper vehicleMapper;
 
-    public VehicleService(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper) {
+
+    public VehicleService(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper, BookingRepository bookingRepository) {
         this.vehicleRepository = vehicleRepository;
         this.vehicleMapper = vehicleMapper;
+
+
     }
 
     // register vehicles to the database
@@ -132,4 +136,6 @@ public class VehicleService {
 
 
     }
+
+
 }

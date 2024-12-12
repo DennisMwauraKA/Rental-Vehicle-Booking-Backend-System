@@ -2,32 +2,35 @@ package com.dennis.vehicleRentalManagement.controller;
 
 
 import com.dennis.vehicleRentalManagement.commonfields.PageResponse;
+import com.dennis.vehicleRentalManagement.dtos.BookingResponse;
 import com.dennis.vehicleRentalManagement.dtos.UpdateVehicleDto;
 import com.dennis.vehicleRentalManagement.dtos.UsersRequestDto;
 import com.dennis.vehicleRentalManagement.dtos.VehicleRegistrationRequest;
-import com.dennis.vehicleRentalManagement.entity.User;
 import com.dennis.vehicleRentalManagement.entity.Vehicle;
+import com.dennis.vehicleRentalManagement.service.BookingService;
 import com.dennis.vehicleRentalManagement.service.UsersService;
 import com.dennis.vehicleRentalManagement.service.VehicleService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 @RestController
 @RequestMapping("/admin")
 @PreAuthorize("hasRole('ADMIN')")
+@Tag(name = "Admin Routes")
 public class AdminRouteController {
 
     private final VehicleService vehicleService;
     private final UsersService usersService;
+    private final BookingService bookingService;
 
-    public AdminRouteController(VehicleService vehicleService, UsersService usersService) {
+    public AdminRouteController(VehicleService vehicleService, UsersService usersService, BookingService bookingService) {
         this.vehicleService = vehicleService;
         this.usersService = usersService;
+        this.bookingService = bookingService;
     }
 
     @GetMapping
@@ -56,11 +59,11 @@ public class AdminRouteController {
     @GetMapping("/view-users")
     @PreAuthorize("hasAuthority('admin:read')")
     public ResponseEntity<PageResponse<UsersRequestDto>> viewAllUsers(
-            @RequestParam(name = "page",defaultValue = "0",required = false)int page,
-            @RequestParam(name = "size",defaultValue = "10",required = false)int size
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size
 
     ) {
-        return ResponseEntity.ok(usersService.viewAllUsers(page,size));
+        return ResponseEntity.ok(usersService.viewAllUsers(page, size));
     }
 
     // update a vehicle
@@ -69,7 +72,17 @@ public class AdminRouteController {
     public ResponseEntity<Vehicle> updateVehicle(@PathVariable("vehicle-id") Integer vehicleId,
                                                  @RequestBody @Valid UpdateVehicleDto updateVehicleDto) {
 
-        return ResponseEntity.ok(vehicleService.updateVehicle(vehicleId,updateVehicleDto));
+        return ResponseEntity.ok(vehicleService.updateVehicle(vehicleId, updateVehicleDto));
+    }
+
+    //get all vehicle bookings
+    @GetMapping("/list-bookings")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public ResponseEntity<PageResponse<BookingResponse>> listAllBookings(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size
+    ) {
+        return ResponseEntity.ok(bookingService.viewAllBookings(page, size));
     }
 
 
